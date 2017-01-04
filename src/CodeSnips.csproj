@@ -103,6 +103,7 @@
     <Compile Include="Json\JsonParsing.cs" />
     <Compile Include="Json\JsonSnip.cs" />
     <Compile Include="JwtTokens\CreateToken.cs" />
+    <Compile Include="JwtTokens\WriteJwtSecurityToken.cs" />
     <Compile Include="Perf\CopyBytes.cs" />
     <Compile Include="Perf\PerfGetType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
