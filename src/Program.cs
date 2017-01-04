@@ -49,8 +49,9 @@ namespace CodeSnips
             Console.WriteLine($"WindowsIdentity.Type.ToString(): {WindowsIdentity.GetCurrent().GetType().ToString()}");
             Console.WriteLine("\nEnvironment =================================\n");
 
-            JsonSnip.Run();
+            //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
+            CreateToken.Run();
 
             Console.WriteLine("\n =====\nPress a key to close");
             Console.ReadKey();
