@@ -30,6 +30,8 @@ namespace CodeSnips
             var secToken = new JwtSecurityToken(header, payload);
 
             var handler = new JwtSecurityTokenHandler();
+            // ten days
+            handler.TokenLifetimeInMinutes = 14400;
             var tokenString = handler.WriteToken(secToken);
             Console.WriteLine($"jwt: {tokenString}");
             Console.WriteLine($"base64Key: {base64Key}");

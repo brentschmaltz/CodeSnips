@@ -17,6 +17,8 @@ namespace CodeSnips
             var issuer = "contoso.com";
             var symmetricKeyString = "VbbbbmlbGJw8XH+ZoYBnUHmHga8/o/IduvU/Tht70iE=";
             var tokenHandler = new JwtSecurityTokenHandler();
+            // ten days
+            tokenHandler.TokenLifetimeInMinutes = 14400;
             var symmetricSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(symmetricKeyString));
             var subject = new ClaimsIdentity(
                 new List<Claim>

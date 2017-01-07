@@ -51,8 +51,8 @@ namespace CodeSnips
 
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
-            //CreateToken.Run();
-            WriteJwtSecurityToken.Run();
+            CreateToken.Run();
+            //WriteJwtSecurityToken.Run();
 
             Console.WriteLine("\n =====\nPress a key to close");
             Console.ReadKey();
