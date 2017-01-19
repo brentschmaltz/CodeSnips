@@ -27,13 +27,6 @@
 
 using System;
 using System.Security.Principal;
-using System.Threading;
-using CodeSnips.BasicCLR;
-using CodeSnips.Json;
-using CodeSnips.Perf;
-using CodeSnips.Crypto;
-using CodeSnips.SecurityKeys;
-using CodeSnips.UrlEncoding;
 
 namespace CodeSnips
 {
@@ -41,18 +34,18 @@ namespace CodeSnips
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("\nEnvironment =================================\n");
+            Console.WriteLine("=============== Environment ================");
             Console.WriteLine($"Environment.MachineName: {Environment.MachineName}");
             Console.WriteLine($"Environment.UserName: {Environment.UserName}");
             Console.WriteLine($"Environment.WindowsIdentity.User: {WindowsIdentity.GetCurrent().User}");
             Console.WriteLine($"Environment.CommonApplicationData: {Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}");
             Console.WriteLine($"WindowsIdentity.Type.ToString(): {WindowsIdentity.GetCurrent().GetType().ToString()}");
-            Console.WriteLine("\nEnvironment =================================\n");
 
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
-            CreateToken.Run();
+            //CreateToken.Run();
             //WriteJwtSecurityToken.Run();
+            GetAccessTokenUsingAdal.Run();
 
             Console.WriteLine("\n =====\nPress a key to close");
             Console.ReadKey();
