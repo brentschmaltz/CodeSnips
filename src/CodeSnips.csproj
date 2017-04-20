@@ -153,6 +153,7 @@
     <Compile Include="Testing\Moq.cs" />
     <Compile Include="TokenValidation\IssuerValidatorSnip.cs" />
     <Compile Include="UrlEncoding\UrlEncoding.cs" />
+    <Compile Include="Xml\XmlReaderSnips.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

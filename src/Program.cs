@@ -45,7 +45,8 @@ namespace CodeSnips
             //GenerateBase64SymmetricKeys.Run();
             //CreateToken.Run();
             //WriteJwtSecurityToken.Run();
-            GetAccessTokenUsingAdal.Run();
+            //GetAccessTokenUsingAdal.Run();
+            XmlReaderSnips.Run();
 
             Console.WriteLine("\n =====\nPress a key to close");
             Console.ReadKey();
