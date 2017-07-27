@@ -36,6 +36,8 @@ namespace CodeSnips
         {
             string str = null;
 
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Null string format: '{0}'", str));
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Null string format (?? string.Empty): '{0}'", str ?? string.Empty));
             var strFormatted = string.Format(CultureInfo.InvariantCulture, "Null string format: '{0}'", str);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "String with null param: '{0}'.", strFormatted));
 

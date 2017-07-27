@@ -21,7 +21,7 @@ namespace CodeSnips
                 X509Certificate2 certificate = FindCertificate(StoreLocation.LocalMachine, StoreName.My, thumbprint);
                 AuthenticationContext authenticationContext = new AuthenticationContext(authority, false, null);
                 ClientAssertionCertificate clientAssertion = new ClientAssertionCertificate(clientId, certificate);
-                var authenticationResult = authenticationContext.AcquireToken(resource, clientAssertion);
+                var authenticationResult = authenticationContext.AcquireTokenAsync(resource, clientAssertion).Result;
                 appToken = authenticationResult.AccessToken;
                 Console.WriteLine("");
                 Console.WriteLine("=============== Access Token ================");

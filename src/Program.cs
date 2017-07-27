@@ -26,7 +26,9 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
+using CodeSnips.Certificates;
 
 namespace CodeSnips
 {
@@ -40,13 +42,15 @@ namespace CodeSnips
             Console.WriteLine($"Environment.WindowsIdentity.User: {WindowsIdentity.GetCurrent().User}");
             Console.WriteLine($"Environment.CommonApplicationData: {Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}");
             Console.WriteLine($"WindowsIdentity.Type.ToString(): {WindowsIdentity.GetCurrent().GetType().ToString()}");
-
+            StringFormat.Run();
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
             //CreateToken.Run();
             //WriteJwtSecurityToken.Run();
             //GetAccessTokenUsingAdal.Run();
-            XmlReaderSnips.Run();
+            //XmlReaderSnips.Run();
+            //GetCertificteSnip.GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts");
+            //CompareTwoCerts.Compare(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts", StoreName.My, StoreLocation.CurrentUser, "CN=SelfHostSts");
 
             Console.WriteLine("\n =====\nPress a key to close");
             Console.ReadKey();
