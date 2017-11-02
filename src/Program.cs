@@ -29,6 +29,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using CodeSnips.Certificates;
+using CodeSnips.Perf;
 
 namespace CodeSnips
 {
@@ -36,13 +37,18 @@ namespace CodeSnips
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("");
             Console.WriteLine("=============== Environment ================");
+            Console.WriteLine("");
             Console.WriteLine($"Environment.MachineName: {Environment.MachineName}");
             Console.WriteLine($"Environment.UserName: {Environment.UserName}");
             Console.WriteLine($"Environment.WindowsIdentity.User: {WindowsIdentity.GetCurrent().User}");
             Console.WriteLine($"Environment.CommonApplicationData: {Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}");
             Console.WriteLine($"WindowsIdentity.Type.ToString(): {WindowsIdentity.GetCurrent().GetType().ToString()}");
-            StringFormat.Run();
+            Console.WriteLine("");
+            Console.WriteLine("=============== Environment ================");
+            Console.WriteLine("");
+            //StringFormat.Run();
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
             //CreateToken.Run();
@@ -51,8 +57,14 @@ namespace CodeSnips
             //XmlReaderSnips.Run();
             //GetCertificteSnip.GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts");
             //CompareTwoCerts.Compare(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts", StoreName.My, StoreLocation.CurrentUser, "CN=SelfHostSts");
-
-            Console.WriteLine("\n =====\nPress a key to close");
+            ReadTokenPerf.Run();
+            ReadTokenPerf.Run();
+            ReadTokenPerf.Run();
+            ReadTokenPerf.Run();
+            ReadTokenPerf.Run();
+            Console.WriteLine("");
+            Console.WriteLine("===================================");
+            Console.WriteLine("Press a key to close");
             Console.ReadKey();
         }
     }
