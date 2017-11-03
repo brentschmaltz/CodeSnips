@@ -30,6 +30,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using CodeSnips.Certificates;
 using CodeSnips.Perf;
+using CodeSnips.Xml;
 
 namespace CodeSnips
 {
@@ -57,11 +58,23 @@ namespace CodeSnips
             //XmlReaderSnips.Run();
             //GetCertificteSnip.GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts");
             //CompareTwoCerts.Compare(StoreName.My, StoreLocation.LocalMachine, "CN=SelfHostSts", StoreName.My, StoreLocation.CurrentUser, "CN=SelfHostSts");
-            ReadTokenPerf.Run();
-            ReadTokenPerf.Run();
-            ReadTokenPerf.Run();
-            ReadTokenPerf.Run();
-            ReadTokenPerf.Run();
+            //ReadTokenPerf.Run();
+            //ReadTokenPerf.Run();
+            //ReadTokenPerf.Run();
+            //ReadTokenPerf.Run();
+            //ReadTokenPerf.Run();
+            //InMemoryPrivateCert.Run();
+            string jws = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwOi8vUzJTQmFja2VuZCIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2FkZDI5NDg5LTcyNjktNDFmNC04ODQxLWI2M2M5NTU2NDQyMC8iLCJpYXQiOjE0Njc0OTczMzAsIm5iZiI6MTQ2NzQ5NzMzMCwiZXhwIjoxNDY3NTAxMjMwLCJhcHBpZCI6IjJkMTQ5OTE3LTEyM2QtNGJhMy04Nzc0LTMyN2I4NzVmNTU0MCIsImFwcGlkYWNyIjoiMiIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2FkZDI5NDg5LTcyNjktNDFmNC04ODQxLWI2M2M5NTU2NDQyMC8iLCJvaWQiOiI5MTkxOTZmNi0zOGZkLTQ2ZjMtODY4Ni1hNDllMjk0NGIyNzciLCJzdWIiOiI5MTkxOTZmNi0zOGZkLTQ2ZjMtODY4Ni1hNDllMjk0NGIyNzciLCJ0aWQiOiJhZGQyOTQ4OS03MjY5LTQxZjQtODg0MS1iNjNjOTU1NjQ0MjAiLCJ2ZXIiOiIxLjAifQ.QLOroZZY53Gj97VuI2X66dxZ6vDIfJlDBwsDTAMJR8FcugucpWTyMtkCm9JcOHOb78lBwaMTJlOwUcb7qrwRrtjkxGCI3hUw-LBPREqM-AowlrUk1ORvB4CV7zDqH6m6s0LL91I3JpQEhMsQxo1OfcYyDR-vKJ5ybprYUgMIKmPeqGbUMLYDCwO9-0efl3LCdyI3FRlcbDg1960z2OlgmbFSlpQiT4bDDHszx1W0G0mJjO8Ypkfh3z_aBBoclkSR34lV_htJlCcW0CM7dopOzHACljCiJWgDh_q5pULLIWeGnYFKLtJZR7wSKp18a-k28xT_S1fgMqFooZ0r-5i3kA.eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9";
+            string jwe = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwOi8vUzJTQmFja2VuZCIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2FkZDI5NDg5LTcyNjktNDFmNC04ODQxLWI2M2M5NTU2NDQyMC8iLCJpYXQiOjE0Njc0OTczMzAsIm5iZiI6MTQ2NzQ5NzMzMCwiZXhwIjoxNDY3NTAxMjMwLCJhcHBpZCI6IjJkMTQ5OTE3LTEyM2QtNGJhMy04Nzc0LTMyN2I4NzVmNTU0MCIsImFwcGlkYWNyIjoiMiIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2FkZDI5NDg5LTcyNjktNDFmNC04ODQxLWI2M2M5NTU2NDQyMC8iLCJvaWQiOiI5MTkxOTZmNi0zOGZkLTQ2ZjMtODY4Ni1hNDllMjk0NGIyNzciLCJzdWIiOiI5MTkxOTZmNi0zOGZkLTQ2ZjMtODY4Ni1hNDllMjk0NGIyNzciLCJ0aWQiOiJhZGQyOTQ4OS03MjY5LTQxZjQtODg0MS1iNjNjOTU1NjQ0MjAiLCJ2ZXIiOiIxLjAifQ.QLOroZZY53Gj97VuI2X66dxZ6vDIfJlDBwsDTAMJR8FcugucpWTyMtkCm9JcOHOb78lBwaMTJlOwUcb7qrwRrtjkxGCI3hUw-LBPREqM-AowlrUk1ORvB4CV7zDqH6m6s0LL91I3JpQEhMsQxo1OfcYyDR-vKJ5ybprYUgMIKmPeqGbUMLYDCwO9-0efl3LCdyI3FRlcbDg1960z2OlgmbFSlpQiT4bDDHszx1W0G0mJjO8Ypkfh3z_aBBoclkSR34lV_htJlCcW0CM7dopOzHACljCiJWgDh_q5pULLIWeGnYFKLtJZR7wSKp18a-k28xT_S1fgMqFooZ0r-5i3kA";
+
+            CanReadJwt.Run(jws, "JWS");
+            CanReadJwt.Run(jwe, "JWE");
+            CanReadJwt.Run(jwe, "JWE");
+            CanReadJwt.Run(jws, "JWS");
+            CanReadJwt.Run(jwe, "JWE");
+            CanReadJwt.Run(jws, "JWS");
+
+            //WsFed.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");
