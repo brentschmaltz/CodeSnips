@@ -29,10 +29,10 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using CodeSnips.Certificates;
+using CodeSnips.Crypto;
 using CodeSnips.Perf;
-using CodeSnips.Xml;
+//using CodeSnips.Xml;
 using CodeSnips.BasicCLR;
-
 namespace CodeSnips
 {
     class Program
@@ -50,7 +50,7 @@ namespace CodeSnips
             Console.WriteLine("");
             Console.WriteLine("=============== Environment ================");
             Console.WriteLine("");
-            //StringFormat.Run();
+            //UrlTesting.Run();
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
             //CreateToken.Run();
@@ -79,6 +79,12 @@ namespace CodeSnips
             BasicCLR.Enum.Run();
 
             //WsFed.Run();
+            //Marshaling.Run();
+            //ExceptionType.Run();
+            //JObjectValue.Run();
+            //StringEquals.Run();
+            ObjectEquals.Run();
+
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");

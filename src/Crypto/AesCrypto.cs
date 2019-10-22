@@ -36,8 +36,11 @@ namespace CodeSnips.Crypto
         {
             Display(new AesCryptoServiceProvider(), "Default AesCryptoServiceProvider");
             Display(new AesManaged(), "Default AesManaged");
-            var aes = new AesCryptoServiceProvider();
-            aes.KeySize = 256;
+            var aes = new AesCryptoServiceProvider
+            {
+                KeySize = 256
+            };
+
             Display(aes, "KeySize = 256, AesCryptoServiceProvider");
 
 

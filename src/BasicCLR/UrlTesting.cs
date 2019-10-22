@@ -26,6 +26,7 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Net;
 
 namespace CodeSnips
 {
@@ -33,12 +34,12 @@ namespace CodeSnips
     {
         public static void Run()
         {
-            Display("https://www.microsoft.com:80/tenant/");
-            Display("https://www.microsoft.com:443/tenant/");
-            Display("https://www.microsoft.com/tenant/");
-            Display("http://www.microsoft.com:80/tenant/");
-            Display("http://www.microsoft.com/tenant/");
-            Display("http://www.microsoft.com:801/tenant/");
+            Display("https://www.microsoft.com:80/tenant/?query=foo");
+            Display("https://www.microsoft.com:443/tenant/?query=foo");
+            Display("https://www.microsoft.com/tenant/?query=foo");
+            Display("http://www.microsoft.com:80/tenant/?query=foo");
+            Display("http://www.microsoft.com/tenant/?query=foo");
+            Display("http://www.microsoft.com:801/tenant/?query=foo");
         }
 
         private static void Display(string address)
@@ -51,6 +52,7 @@ namespace CodeSnips
             var scheme = uri.Scheme;
             var segments = uri.Segments;
             var delimeter = Uri.SchemeDelimiter;
+            var encoded = WebUtility.UrlEncode(address);
 
             Console.WriteLine("======================================");
             Console.WriteLine("");
@@ -65,6 +67,7 @@ namespace CodeSnips
             Console.WriteLine("leftPart(UriPartial.Authority): " + leftPart);
             Console.WriteLine("port: " + port);
             Console.WriteLine("scheme: " + scheme);
+            Console.WriteLine("encoded: " + encoded);
 
             var indexOfSlash = address.Substring(scheme.Length + delimeter.Length).IndexOf(@"/");
             var fullHost = address.Substring(0, indexOfSlash + scheme.Length + delimeter.Length);
