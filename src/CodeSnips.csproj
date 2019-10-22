@@ -114,6 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicCLR\Enum.cs" />
     <Compile Include="BasicCLR\Properties.cs" />
     <Compile Include="BasicCLR\CopyWithDictionaries.cs" />
     <Compile Include="BasicCLR\DefautlValue.cs" />
