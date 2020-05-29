@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 //
-// Copyright (c) AuthFactors.com.
+// Copyright (c) Brent Schmaltz
 // All rights reserved.
 //
 // This code is licensed under the MIT License.
@@ -25,10 +25,10 @@
 //
 //------------------------------------------------------------------------------
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace CodeSnips.Json
 {

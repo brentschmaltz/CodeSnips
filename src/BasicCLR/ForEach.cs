@@ -25,17 +25,18 @@
 //
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
+using System;
+using System.Collections.Generic;
 
 namespace CodeSnips
 {
-    public class DefautlValue
+    public class ForEach
     {
-        [DefaultValue(true)]
-        public bool BOOL
+        public static void Run()
         {
-            get;
-            set;
+            List<int> ints = null;
+            foreach (var i in ints)
+                Console.WriteLine($"int: '{i}'.");
         }
     }
 }

@@ -34,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -117,6 +118,7 @@
   <ItemGroup>
     <Compile Include="BasicCLR\Enum.cs" />
     <Compile Include="BasicCLR\ExceptionType.cs" />
+    <Compile Include="BasicCLR\ForEach.cs" />
     <Compile Include="BasicCLR\ObjectEquals.cs" />
     <Compile Include="BasicCLR\Properties.cs" />
     <Compile Include="BasicCLR\CopyWithDictionaries.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="BasicCLR\StringEquals.cs" />
     <Compile Include="BasicCLR\StringFormat.cs" />
     <Compile Include="BasicCLR\StringSplit.cs" />
+    <Compile Include="BasicCLR\TypeEquals.cs" />
     <Compile Include="BasicCLR\UrlTesting.cs" />
     <Compile Include="Certificates\CompareTwoCerts.cs" />
     <Compile Include="Certificates\GetCertificateSnip.cs" />
@@ -151,6 +154,7 @@
     <Compile Include="Perf\CanReadJwt.cs" />
     <Compile Include="Perf\CopyBytes.cs" />
     <Compile Include="Perf\PerfGetType.cs" />
+    <Compile Include="Perf\ProcessMemoryUsage.cs" />
     <Compile Include="Perf\ReadTokenPerf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

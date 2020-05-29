@@ -207,3 +207,4 @@ stash/*
 TestResults/*
 docs/*
 backup/*
+*/**/.vs/*

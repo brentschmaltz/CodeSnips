@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// Copyright (c) AuthFactors.com.
+// Copyright (c) Brent Schmaltz
 // All rights reserved.
 //
 // This code is licensed under the MIT License.
@@ -26,13 +26,9 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
-using CodeSnips.Certificates;
-using CodeSnips.Crypto;
 using CodeSnips.Perf;
-//using CodeSnips.Xml;
-using CodeSnips.BasicCLR;
+
 namespace CodeSnips
 {
     class Program
@@ -76,14 +72,17 @@ namespace CodeSnips
             //CanReadJwt.Run(jwe, "JWE");
             //CanReadJwt.Run(jws, "JWS");
 
-            BasicCLR.Enum.Run();
-
+            //BasicCLR.Enum.Run();
             //WsFed.Run();
             //Marshaling.Run();
             //ExceptionType.Run();
             //JObjectValue.Run();
             //StringEquals.Run();
-            ObjectEquals.Run();
+            //ObjectEquals.Run();
+            //ForEach.Run();
+            //TypeEquals.Run();
+
+            ProcessMemoryUsage.Run();
 
             Console.WriteLine("");
             Console.WriteLine("===================================");

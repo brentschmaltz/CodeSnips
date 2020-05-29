@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// Copyright (c) AuthFactors.com.
+// Copyright (c) Brent Schmaltz
 // All rights reserved.
 //
 // This code is licensed under the MIT License.
@@ -26,7 +26,6 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Globalization;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;

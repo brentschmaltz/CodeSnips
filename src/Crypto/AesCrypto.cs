@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 //
-// Copyright (c) AuthFactors.com.
+// Copyright (c) Brent Schmaltz
 // All rights reserved.
 //
 // This code is licensed under the MIT License.

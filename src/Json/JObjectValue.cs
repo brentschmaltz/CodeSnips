@@ -1,7 +1,32 @@
-﻿using System;
+﻿//------------------------------------------------------------------------------
+//
+// Copyright (c) Brent Schmaltz
+// All rights reserved.
+//
+// This code is licensed under the MIT License.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files(the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 
 namespace CodeSnips
@@ -44,9 +69,9 @@ namespace CodeSnips
                 Console.WriteLine($"claimName: {claimName}");
                 try
                 {
-                    var claimValue = jObject.Value<bool>(claimName);
+                    var jtoken = jObject.Value<bool>(claimName);
                     Console.WriteLine(""); 
-                    Console.WriteLine($"claimValue<bool>: {claimValue}, typeof: {(claimValue == null ? "null" : claimValue.GetType().ToString())}.");
+                    Console.WriteLine($"jtoken: {jtoken}, typeof: {jtoken}.");
                     Console.WriteLine("");
                 }
                 catch (Exception ex)
@@ -72,10 +97,9 @@ namespace CodeSnips
                 try
                 {
 
-                    var claim = jObject.GetValue(claimName);
-                    var claimValue = claim.ToObject<bool>();
+                    var jtoken = jObject.GetValue(claimName);
                     Console.WriteLine("");
-                    Console.WriteLine($" claim.ToObject<bool>: {claimValue}, typeof: {(claimValue == null ? "null" : claimValue.GetType().ToString())}.");
+                    Console.WriteLine($" jtoken: {jtoken}, typeof: {jtoken.Type}.");
                     Console.WriteLine("");
                 }
                 catch (Exception ex)
@@ -99,7 +123,7 @@ namespace CodeSnips
                 {
                     var claimValue = jObject.Value<int>(claimName);
                     Console.WriteLine("");
-                    Console.WriteLine($"claimValue<int>: {claimValue}, typeof: {(claimValue == null ? "null" : claimValue.GetType().ToString())}.");
+                    Console.WriteLine($"claimValue<int>: {claimValue}.");
                     Console.WriteLine("");
                 }
                 catch (Exception ex)
