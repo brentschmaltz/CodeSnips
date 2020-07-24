@@ -27,6 +27,7 @@
 
 using System;
 using System.Security.Principal;
+using CodeSnips.BasicCLR;
 using CodeSnips.Perf;
 
 namespace CodeSnips
@@ -81,8 +82,10 @@ namespace CodeSnips
             //ObjectEquals.Run();
             //ForEach.Run();
             //TypeEquals.Run();
-
-            ProcessMemoryUsage.Run();
+            //ProcessMemoryUsage.Run();
+            //Collections.Run();
+            //ParseStringToObject.Run();
+            Inheritance.Run();
 
             Console.WriteLine("");
             Console.WriteLine("===================================");

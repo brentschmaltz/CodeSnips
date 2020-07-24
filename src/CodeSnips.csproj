@@ -116,10 +116,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicCLR\Collections.cs" />
     <Compile Include="BasicCLR\Enum.cs" />
     <Compile Include="BasicCLR\ExceptionType.cs" />
     <Compile Include="BasicCLR\ForEach.cs" />
+    <Compile Include="BasicCLR\Inheritance.cs" />
     <Compile Include="BasicCLR\ObjectEquals.cs" />
+    <Compile Include="BasicCLR\ParseStringToObject.cs" />
     <Compile Include="BasicCLR\Properties.cs" />
     <Compile Include="BasicCLR\CopyWithDictionaries.cs" />
     <Compile Include="BasicCLR\DefautlValue.cs" />
