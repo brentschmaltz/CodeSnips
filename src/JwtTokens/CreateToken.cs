@@ -33,6 +33,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace CodeSnips
@@ -109,11 +111,13 @@ namespace CodeSnips
 
         public static void JwtWithActClaim()
         {
+            JsonExtensions.Serializer = JsonConvert.SerializeObject;
+            JsonExtensions.Deserializer = JsonConvert.DeserializeObject;
 
             var delegationClaim1 = new DelegationActorClaim("client1", string.Empty);
-            var delegationClaim2 = new DelegationActorClaim("client2", JsonSerializer.Serialize(delegationClaim1));
-            var delegationClaim3 = new DelegationActorClaim("client3", JsonSerializer.Serialize(delegationClaim2));
-            var delegationClaim4 = new DelegationActorClaim("client4", JsonSerializer.Serialize(delegationClaim3));
+            var delegationClaim2 = new DelegationActorClaim("client2", System.Text.Json.JsonSerializer.Serialize(delegationClaim1));
+            var delegationClaim3 = new DelegationActorClaim("client3", System.Text.Json.JsonSerializer.Serialize(delegationClaim2));
+            var delegationClaim4 = new DelegationActorClaim("client4", System.Text.Json.JsonSerializer.Serialize(delegationClaim3));
             var claim = delegationClaim4.ToClaim();
 
             var jwtSecurityToken = CreateJwtSecurityToken(delegationClaim4);
@@ -127,7 +131,11 @@ namespace CodeSnips
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtPayload = new JwtPayload("http://localhost:5001", null, null, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(2));
-            jwtPayload.Add("act", delegationActorClaim.ToJson());
+
+            // jwtPayload.AddClaim(claim);
+            jwtPayload.Add("act", JToken.FromObject(delegationActorClaim));
+
+            //jwtPayload.Add("act", delegationActorClaim.ToJson());
             var jwt = new JwtSecurityToken(new JwtHeader(), jwtPayload);
             var token = tokenHandler.WriteToken(jwt);
             var claimsPrincipal = tokenHandler.ValidateToken(token, new TokenValidationParameters { ValidateAudience = false, ValidateIssuer = false, RequireSignedTokens = false }, out SecurityToken securityToken);
@@ -171,17 +179,17 @@ namespace CodeSnips
                 return;
             }
 
-            Actor = JsonSerializer.Deserialize<DelegationActorClaim>(previousActor);
+            Actor = System.Text.Json.JsonSerializer.Deserialize<DelegationActorClaim>(previousActor);
         }
 
         public Claim ToClaim()
         {
-            return new Claim("act", JsonSerializer.Serialize(this), "json");
+            return new Claim("act", System.Text.Json.JsonSerializer.Serialize(this), "json");
         }
 
         public string ToJson()
         {
-            return JsonSerializer.Serialize(this);
+            return System.Text.Json.JsonSerializer.Serialize(this);
         }
     }
 }
