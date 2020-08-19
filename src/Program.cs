@@ -85,8 +85,9 @@ namespace CodeSnips
             //ProcessMemoryUsage.Run();
             //Collections.Run();
             //ParseStringToObject.Run();
-            Inheritance.Run();
-
+            //Inheritance.Run();
+            //CreateToken.AddSubClaim();
+            CreateToken.JwtWithActClaim();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");
