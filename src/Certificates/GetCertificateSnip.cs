@@ -39,14 +39,13 @@ namespace CodeSnips.Certificates
             X509Store store = new X509Store(name, location);
             X509Certificate2Collection certificates = null;
             store.Open(OpenFlags.ReadOnly);
- 
             try
             {
                 X509Certificate2 result = null;
  
                 // Every time we call store.Certificates property, a new collection will be returned.
                 certificates = store.Certificates;
- 
+
                 for (int i = 0; i < certificates.Count; i++)
                 {
                     X509Certificate2 cert = certificates[i];

@@ -46,8 +46,8 @@ namespace CodeSnips
     {
         public static void Run()
         {
-            var audience = "microsoft.com";
-            var issuer = "contoso.com";
+            var audience = "http://relyingParty.com";
+            var issuer = "http://relyingParty.com";
             var symmetricKeyString = "VbbbbmlbGJw8XH+ZoYBnUHmHga8/o/IduvU/Tht70iE=";
             var tokenHandler = new JwtSecurityTokenHandler();
             // ten days
@@ -59,7 +59,8 @@ namespace CodeSnips
                     new Claim(JwtRegisteredClaimNames.Aud, audience),
                     new Claim(JwtRegisteredClaimNames.Email, "bob@contoso.com"),
                     new Claim(JwtRegisteredClaimNames.GivenName, "bob"),
-                    new Claim(JwtRegisteredClaimNames.Sub, "123456789")
+                    new Claim(JwtRegisteredClaimNames.Sub, "123456789"),
+                    new Claim("resource", "123456789")
                 });
 
             var tokenDescriptor = new SecurityTokenDescriptor()

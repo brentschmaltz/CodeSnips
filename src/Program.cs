@@ -28,7 +28,12 @@
 using System;
 using System.Security.Principal;
 using CodeSnips.BasicCLR;
+using CodeSnips.Crypto;
 using CodeSnips.Perf;
+using CodeSnips.JwtTokens;
+using static System.Net.WebUtility;
+using CodeSnips.Xml;
+using CodeSnips.Threading;
 
 namespace CodeSnips
 {
@@ -73,6 +78,7 @@ namespace CodeSnips
             //CanReadJwt.Run(jwe, "JWE");
             //CanReadJwt.Run(jws, "JWS");
 
+            //InMemoryPrivateCert.Run();
             //BasicCLR.Enum.Run();
             //WsFed.Run();
             //Marshaling.Run();
@@ -86,8 +92,16 @@ namespace CodeSnips
             //Collections.Run();
             //ParseStringToObject.Run();
             //Inheritance.Run();
+            //CreateToken.Run();
             //CreateToken.AddSubClaim();
-            CreateToken.JwtWithActClaim();
+            //CreateToken.JwtWithActClaim();
+            //Contracts.ExploreContractRequires();
+            // ReflectionSnips.Run();
+            //CertificateCrypto.Run();
+            //ClearMap.Run();
+            //c14n.Run();
+            //ValidateJsonToken.Run();
+            Certificates.CreateCertificate.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");
