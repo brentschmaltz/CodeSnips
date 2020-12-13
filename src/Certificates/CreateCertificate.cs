@@ -37,7 +37,16 @@ namespace CodeSnips.Certificates
             }
             else
             {
-                return certificateRequest.Create(issuer, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow.AddDays(10), SerialNumber);
+                var cert = certificateRequest.Create(issuer, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow.AddDays(10), Guid.NewGuid().ToByteArray());
+
+                // add private key
+                if (key is ECDsa)
+                    return cert.CopyWithPrivateKey(key as ECDsa);
+
+                if (key is RSA)
+                    return cert.CopyWithPrivateKey(key as RSA);
+
+                return cert;
             }
         }
 
@@ -62,18 +71,6 @@ namespace CodeSnips.Certificates
 
             builder.AppendLine("-----END CERTIFICATE REQUEST-----");
             return builder.ToString();
-        }
-
-        static RandomNumberGenerator Random { get; } = RandomNumberGenerator.Create();
-
-        private static byte[] SerialNumber
-        {
-            get
-            {
-                byte[] bytes = new byte[20];
-                Random.GetBytes(bytes);
-                return bytes;
-            }
         }
     }
 }
