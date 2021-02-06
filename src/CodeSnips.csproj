@@ -182,6 +182,7 @@
     <Compile Include="BasicCLR\ReflectionSnips.cs" />
     <Compile Include="BasicCLR\RegEx.cs" />
     <Compile Include="BasicCLR\RegexCode.cs" />
+    <Compile Include="Crypto\RsaEncryptCreateDelegate.cs" />
     <Compile Include="BasicCLR\StaticDictionary.cs" />
     <Compile Include="BasicCLR\StringEquals.cs" />
     <Compile Include="BasicCLR\StringFormat.cs" />

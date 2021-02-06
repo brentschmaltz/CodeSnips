@@ -101,7 +101,8 @@ namespace CodeSnips
             //ClearMap.Run();
             //c14n.Run();
             //ValidateJsonToken.Run();
-            Certificates.CreateCertificate.Run();
+            //Certificates.CreateCertificate.Run();
+            RsaEncryptCreateDelegate.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");
