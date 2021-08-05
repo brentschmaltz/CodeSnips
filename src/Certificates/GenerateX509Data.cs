@@ -34,9 +34,10 @@ namespace CodeSnips
 {
     public class GenerateX509Data
     {
-        public static void Run(string filename, string certificate)
+        // if password is null => it is not needed
+        public static void Run(string filename, string certificate, string password)
         {
-            var cert = new X509Certificate2(filename);
+            var cert = (string.IsNullOrEmpty(password)) ? new X509Certificate2(filename) : new X509Certificate2(filename, password);
             var rawData = cert.GetRawCertData();
             var x509Data = Convert.ToBase64String(rawData);
             var certData = Convert.ToBase64String(cert.Export(X509ContentType.Cert));
@@ -46,7 +47,7 @@ namespace CodeSnips
             else
                 Console.WriteLine("x509Data != certData");
 
-            Debug.WriteLine("x509Data: " + x509Data);
+            Console.WriteLine("x509Data: " + x509Data);
 
             var encodedThumbprint = Convert.ToBase64String(cert.GetCertHash());
             var guid = Guid.NewGuid().ToString();
@@ -54,9 +55,9 @@ namespace CodeSnips
             output += ("\"keyId\": \"" + guid + "\"") + Environment.NewLine;
             output += "\"usage\": \"Verify\"" + Environment.NewLine;
             output += "\"type\": \"AsymmetricX509Cert\"" + Environment.NewLine;
-            output += ("\"value\": \"" + certData + "\"") + Environment.NewLine; 
+            output += ("\"value\": \"" + certData + "\"") + Environment.NewLine;
 
-            Debug.WriteLine("output: " + output);
+            Console.WriteLine("output: " + output);
             File.WriteAllText(certificate, output);
         }
     }

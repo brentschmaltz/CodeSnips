@@ -29,11 +29,24 @@ using System;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace CodeSnips.Certificates
 {
     public class GetCertificteSnip
     {
+        public static void Run()
+        {
+            X509Certificate2 cert = GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=RSAAES");
+            var pk = cert.PrivateKey as RSACryptoServiceProvider;
+            byte[] data = UTF8Encoding.UTF8.GetBytes("Here are some bytes");
+            var sig = pk.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+            pk = cert.PrivateKey as RSACryptoServiceProvider;
+            sig = pk.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+        }
+
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, string subjectName)
         {
             X509Store store = new X509Store(name, location);

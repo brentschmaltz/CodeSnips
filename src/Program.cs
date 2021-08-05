@@ -34,6 +34,9 @@ using CodeSnips.JwtTokens;
 using static System.Net.WebUtility;
 using CodeSnips.Xml;
 using CodeSnips.Threading;
+using CodeSnips.Certificates;
+using CodeSnips.UrlEncoding;
+using CodeSnips.Json;
 
 namespace CodeSnips
 {
@@ -52,7 +55,11 @@ namespace CodeSnips
             Console.WriteLine("");
             Console.WriteLine("=============== Environment ================");
             Console.WriteLine("");
+            ECBCBCIV.Run();
             //UrlTesting.Run();
+            //Base64UrlEncoding.Run();
+            //jsonserializer.Run();
+            //GenerateX509Data.Run("S2SWebSite.pfx", "S2SWebSiteX509Data.txt", "S2SWebSite");
             //JsonSnip.Run();
             //GenerateBase64SymmetricKeys.Run();
             //CreateToken.Run();
@@ -101,7 +108,10 @@ namespace CodeSnips
             //ClearMap.Run();
             //c14n.Run();
             //ValidateJsonToken.Run();
-            Certificates.CreateCertificate.Run();
+            //Certificates.CreateCertificate.Run();
+            //AesGcmCrypto.Run();
+            //GetCertificteSnip.Run();
+            //RsaEncryptCreateDelegate.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");

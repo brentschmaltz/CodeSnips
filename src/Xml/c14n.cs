@@ -16,7 +16,7 @@ namespace CodeSnips.Xml
             MemoryStream memoryStream = new MemoryStream();
             MemoryStream c14MemoryStream = new MemoryStream();
             var writer = XmlDictionaryWriter.CreateTextWriter(memoryStream, Encoding.UTF8, false);
-            string gro = "Großbauteile";
+            //string gro = "Großbauteile";
             writer.StartCanonicalization(c14MemoryStream, false, null);
             writer.WriteStartElement("With@");
             writer.WriteString(@"\r\nHere is a Großbauteile string\r\n");
