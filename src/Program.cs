@@ -37,6 +37,7 @@ using CodeSnips.Threading;
 using CodeSnips.Certificates;
 using CodeSnips.UrlEncoding;
 using CodeSnips.Json;
+using CodeSnips.WilsonIssues;
 
 namespace CodeSnips
 {
@@ -55,7 +56,7 @@ namespace CodeSnips
             Console.WriteLine("");
             Console.WriteLine("=============== Environment ================");
             Console.WriteLine("");
-            ECBCBCIV.Run();
+            //ECBCBCIV.Run();
             //UrlTesting.Run();
             //Base64UrlEncoding.Run();
             //jsonserializer.Run();
@@ -112,6 +113,11 @@ namespace CodeSnips
             //AesGcmCrypto.Run();
             //GetCertificteSnip.Run();
             //RsaEncryptCreateDelegate.Run();
+            CreateCertificate.Run();
+            //ValidateFileService.Run();
+            //WilsonIssue1815.Run();
+            //WilsonIssue1601.Run();
+            // WilsonIssue1821.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");

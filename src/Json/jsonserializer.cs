@@ -45,7 +45,7 @@ namespace CodeSnips.Json
                 new Claim(JwtRegisteredClaimNames.Exp, EpochTime.GetIntDate(utcNow).ToString(), ClaimValueTypes.String, "issuer", "issuer"),
             });
 
-            string json = JsonSerializer.Serialize(claims, null);
+            string json = JsonSerializer.Serialize(claims);
         }
     }
 }
