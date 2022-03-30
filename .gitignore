@@ -208,3 +208,4 @@ TestResults/*
 docs/*
 backup/*
 */**/.vs/*
+/.vs/
