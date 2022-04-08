@@ -20,6 +20,14 @@ namespace Benchmarks
         }
 
         [Benchmark]
+        public void StringCompareTo()
+        {
+            for (int i = 0; i < _nuymloops; i++)
+                if (_guid.CompareTo(_guid2) == 0)
+                    _numvalues++;
+        }
+
+        [Benchmark]
         public void StringCompare()
         {
             for (int i = 0; i < _nuymloops; i++)
