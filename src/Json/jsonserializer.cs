@@ -7,17 +7,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CodeSnips.Json
 {
-    public class jsonserializer
+    public class JsonSerializer
     {
         public static void Run()
         {
-            JsonEncodedText jsonEncodedText = JsonEncodedText.Encode("THIS IS A STRING");
-            string encoded = Base64UrlEncoder.Encode(jsonEncodedText.EncodedUtf8Bytes.ToArray());
-
-            JsonProperty jsonProperty = new JsonProperty();
-
             var utcNow = DateTime.UtcNow;
-
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, "Bob@contoso.com", ClaimValueTypes.String, "issuer", "issuer"),
@@ -45,7 +39,7 @@ namespace CodeSnips.Json
                 new Claim(JwtRegisteredClaimNames.Exp, EpochTime.GetIntDate(utcNow).ToString(), ClaimValueTypes.String, "issuer", "issuer"),
             });
 
-            string json = JsonSerializer.Serialize(claims);
+            string json = System.Text.Json.JsonSerializer.Serialize(claims);
         }
     }
 }

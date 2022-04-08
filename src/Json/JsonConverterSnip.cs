@@ -76,7 +76,7 @@ namespace CodeSnips.Json
                 return objectType == typeof(ClientWithJsonConverterAttribute);
             }
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
             {
                 var client = value as ClientWithJsonConverterAttribute;
 
@@ -101,7 +101,7 @@ namespace CodeSnips.Json
                 writer.WriteEndObject();
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
             {
                 object obj;
 

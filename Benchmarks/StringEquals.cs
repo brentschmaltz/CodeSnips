@@ -7,43 +7,56 @@ namespace Benchmarks
     public class StringEquals
     {
         private int _numvalues;
-        private int _nuymloops = 1000;
+        private readonly int _nuymloops = 10000;
+        private static string _guid = Guid.NewGuid().ToString();
+        private readonly static string _guid2 = _guid + Guid.NewGuid().ToString();
 
         [Benchmark]
         public void StringEqual()
         {
             for (int i = 0; i < _nuymloops; i++)
-            {
-                string guid = Guid.NewGuid().ToString();
-                string guid2 = guid + Guid.NewGuid().ToString();
-
-                if (string.Equals(guid, guid2))
+                if (string.Equals(_guid, _guid2))
                     _numvalues++;
-            }
+        }
+
+        [Benchmark]
+        public void StringCompare()
+        {
+            for (int i = 0; i < _nuymloops; i++)
+                if (string.Compare(_guid, _guid2) == 0)
+                    _numvalues++;
         }
 
         [Benchmark]
         public void StringEqualsOrdinalIgnoreCase()
         {
             for (int i = 0; i < _nuymloops; i++)
-            {
-                string guid = Guid.NewGuid().ToString();
-                string guid2 = guid + Guid.NewGuid().ToString();
-                if (string.Equals(guid, guid2, System.StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(_guid, _guid2, StringComparison.OrdinalIgnoreCase))
                     _numvalues++;
-            }
+        }
+
+        [Benchmark]
+        public void StringEqualsOrdinal()
+        {
+            for (int i = 0; i < _nuymloops; i++)
+                if (string.Equals(_guid, _guid2, StringComparison.Ordinal))
+                    _numvalues++;
+        }
+
+        [Benchmark]
+        public void StringEqualsInvariantCulture()
+        {
+            for (int i = 0; i < _nuymloops; i++)
+                if (string.Equals(_guid, _guid2, StringComparison.InvariantCulture))
+                    _numvalues++;
         }
 
         [Benchmark]
         public void EqualsEquals()
         {
             for (int i = 0; i < _nuymloops; i++)
-            {
-                string guid = Guid.NewGuid().ToString();
-                string guid2 = guid + Guid.NewGuid().ToString();
-                if (guid == guid2)
+                if (_guid == _guid2)
                     _numvalues++;
-            }
         }
 
         public int NumValues { get { return _numvalues; } }

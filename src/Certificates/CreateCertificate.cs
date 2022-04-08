@@ -66,7 +66,7 @@ namespace CodeSnips.Certificates
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Exception: '{ex}'.");
             }
         }
 

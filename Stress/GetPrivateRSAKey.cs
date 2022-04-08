@@ -12,9 +12,10 @@ namespace Stress
         {
             X509Certificate2 cert = GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=TestingSTS");
             byte[] bytes = Guid.NewGuid().ToByteArray();
-            var privateKey = cert.GetRSAPrivateKey();
-            X509SecurityKey x509SecurityKey = new X509SecurityKey(cert);
+            
+            X509SecurityKey x509SecurityKey = new(cert);
             X509SigningCredentials x509SigningCredentials = new X509SigningCredentials(cert);
+
             while (true)
             {
                 //GetPrivateKey(x509SigningCredentials, bytes);
@@ -33,6 +34,7 @@ namespace Stress
             var key = x509SecurityKey.PrivateKey as RSA;
             key.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         }
+
         private static void GetPrivateKey(X509SigningCredentials x509SigningCredentials, byte[] bytes)
         {
             var key = ((x509SigningCredentials.Key) as X509SecurityKey).PrivateKey as RSA;

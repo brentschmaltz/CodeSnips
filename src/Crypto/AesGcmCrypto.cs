@@ -39,8 +39,7 @@ namespace CodeSnips.Crypto
                 }
 
                 key.CopyTo(blob.AsSpan(sizeof(BCRYPT_KEY_DATA_BLOB_HEADER)));
-                SafeKeyHandle hKey;
-                NTSTATUS ntStatus = BCryptImportKey(hAlg, IntPtr.Zero, BCRYPT_KEY_DATA_BLOB, out hKey, IntPtr.Zero, 0, blob, blobSize, 0);
+                NTSTATUS ntStatus = BCryptImportKey(hAlg, IntPtr.Zero, BCRYPT_KEY_DATA_BLOB, out SafeKeyHandle hKey, IntPtr.Zero, 0, blob, blobSize, 0);
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {
                     throw CreateCryptographicException(ntStatus);
@@ -338,8 +337,7 @@ namespace CodeSnips.Crypto
 
         public static SafeAlgorithmHandle BCryptOpenAlgorithmProvider(string pszAlgId, string? pszImplementation, OpenAlgorithmProviderFlags dwFlags)
         {
-            SafeAlgorithmHandle hAlgorithm;
-            NTSTATUS ntStatus = Interop.BCryptOpenAlgorithmProvider(out hAlgorithm, pszAlgId, pszImplementation, (int)dwFlags);
+            NTSTATUS ntStatus = Interop.BCryptOpenAlgorithmProvider(out SafeAlgorithmHandle hAlgorithm, pszAlgId, pszImplementation, (int)dwFlags);
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 throw CreateCryptographicException(ntStatus);
             return hAlgorithm;
@@ -488,8 +486,7 @@ namespace CodeSnips.Crypto
                     fixed (byte* pbInput = input)
                     fixed (byte* pbOutput = output)
                     {
-                        int cbResult;
-                        NTSTATUS ntStatus = BCryptEncrypt(hKey, pbInput, input.Length, IntPtr.Zero, iv, iv == null ? 0 : iv.Length, pbOutput, output.Length, out cbResult, 0);
+                        NTSTATUS ntStatus = BCryptEncrypt(hKey, pbInput, input.Length, IntPtr.Zero, iv, iv == null ? 0 : iv.Length, pbOutput, output.Length, out int cbResult, 0);
 
                         if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                         {
@@ -509,8 +506,7 @@ namespace CodeSnips.Crypto
                     fixed (byte* pbInput = input)
                     fixed (byte* pbOutput = output)
                     {
-                        int cbResult;
-                        NTSTATUS ntStatus = BCryptDecrypt(hKey, pbInput, input.Length, IntPtr.Zero, iv, iv == null ? 0 : iv.Length, pbOutput, output.Length, out cbResult, 0);
+                        NTSTATUS ntStatus = BCryptDecrypt(hKey, pbInput, input.Length, IntPtr.Zero, iv, iv == null ? 0 : iv.Length, pbOutput, output.Length, out int cbResult, 0);
 
                         if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                         {
