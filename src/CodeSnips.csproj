@@ -83,6 +83,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens.Saml, Version=6.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Tokens.Saml.6.17.0\lib\net472\Microsoft.IdentityModel.Tokens.Saml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Validators, Version=6.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Validators.6.17.0\lib\net472\Microsoft.IdentityModel.Validators.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.Xml, Version=6.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Xml.6.17.0\lib\net472\Microsoft.IdentityModel.Xml.dll</HintPath>
     </Reference>
@@ -185,6 +188,7 @@
     <Compile Include="BasicCLR\ReflectionSnips.cs" />
     <Compile Include="BasicCLR\RegEx.cs" />
     <Compile Include="BasicCLR\RegexCode.cs" />
+    <Compile Include="Certificates\ParseStoreLocationAndName.cs" />
     <Compile Include="Crypto\RsaEncryptCreateDelegate.cs" />
     <Compile Include="BasicCLR\StaticDictionary.cs" />
     <Compile Include="BasicCLR\StringEquals.cs" />
@@ -216,6 +220,7 @@
     <Compile Include="JwtTokens\GetAccessTokenUsingAdal.cs" />
     <Compile Include="JwtTokens\ValidateFileService.cs" />
     <Compile Include="JwtTokens\ValidateJsonToken.cs" />
+    <Compile Include="WilsonIssues\AadIssuerValidatorIssue1836.cs" />
     <Compile Include="WilsonIssues\WilsonIssue1601.cs" />
     <Compile Include="WilsonIssues\WilsonIssue1815.cs" />
     <Compile Include="JwtTokens\WriteJwtSecurityToken.cs" />

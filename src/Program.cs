@@ -113,11 +113,13 @@ namespace CodeSnips
             //AesGcmCrypto.Run();
             //GetCertificteSnip.Run();
             //RsaEncryptCreateDelegate.Run();
-            CreateCertificate.Run();
+            //CreateCertificate.Run();
             //ValidateFileService.Run();
             //WilsonIssue1815.Run();
             //WilsonIssue1601.Run();
             // WilsonIssue1821.Run();
+            //ParseStoreLocationAndName.Run();
+            AadIssuerValidatorIssue1836.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");
