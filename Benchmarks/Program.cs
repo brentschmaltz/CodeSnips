@@ -9,7 +9,9 @@ namespace Benchmarks
         static void Main(string[] args)
         {
             //BenchmarkRunner.Run<JsonDeserialize>();
-            BenchmarkRunner.Run<StringEquals>();
+            //BenchmarkRunner.Run<StringEquals>();
+            //BenchmarkRunner.Run<DecodeJson>();
+            BenchmarkRunner.Run<InstanceVars>();
         }
     }
 }

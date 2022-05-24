@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.17.0" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.17.1-preview-30522165858" />
     <PackageReference Include="System.Text.Json" Version="6.0.2" />
   </ItemGroup>
 
