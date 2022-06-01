@@ -11,7 +11,9 @@ namespace Benchmarks
             //BenchmarkRunner.Run<JsonDeserialize>();
             //BenchmarkRunner.Run<StringEquals>();
             //BenchmarkRunner.Run<DecodeJson>();
-            BenchmarkRunner.Run<InstanceVars>();
+            //BenchmarkRunner.Run<InstanceVars>();
+            //BenchmarkRunner.Run<ArrayCopy>();
+            BenchmarkRunner.Run<ReturnReadOnlyDictionary>();
         }
     }
 }

@@ -119,7 +119,11 @@ namespace CodeSnips
             //WilsonIssue1601.Run();
             //WilsonIssue1821.Run();
             //ParseStoreLocationAndName.Run();
-            AadIssuerValidatorIssue1836.Run();
+            //AadIssuerValidatorIssue1836.Run();
+            //TokenValidationParametersClone.Run();
+            //KeyedHash.Run();
+            Dictionaries.Run();
+
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");

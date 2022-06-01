@@ -175,6 +175,7 @@
   <ItemGroup>
     <Compile Include="BasicCLR\Collections.cs" />
     <Compile Include="BasicCLR\ContractRequires.cs" />
+    <Compile Include="BasicCLR\Dictionaries.cs" />
     <Compile Include="BasicCLR\Enum.cs" />
     <Compile Include="BasicCLR\ExceptionType.cs" />
     <Compile Include="BasicCLR\ForEach.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="BasicCLR\RegEx.cs" />
     <Compile Include="BasicCLR\RegexCode.cs" />
     <Compile Include="Certificates\ParseStoreLocationAndName.cs" />
+    <Compile Include="Crypto\KeyedHash.cs" />
     <Compile Include="Crypto\RsaEncryptCreateDelegate.cs" />
     <Compile Include="BasicCLR\StaticDictionary.cs" />
     <Compile Include="BasicCLR\StringEquals.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="JwtTokens\ValidateFileService.cs" />
     <Compile Include="JwtTokens\ValidateJsonToken.cs" />
     <Compile Include="WilsonIssues\AadIssuerValidatorIssue1836.cs" />
+    <Compile Include="WilsonIssues\TokenValidationParametersClone.cs" />
     <Compile Include="WilsonIssues\WilsonIssue1601.cs" />
     <Compile Include="WilsonIssues\WilsonIssue1815.cs" />
     <Compile Include="JwtTokens\WriteJwtSecurityToken.cs" />
