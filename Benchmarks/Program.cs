@@ -13,7 +13,8 @@ namespace Benchmarks
             //BenchmarkRunner.Run<DecodeJson>();
             //BenchmarkRunner.Run<InstanceVars>();
             //BenchmarkRunner.Run<ArrayCopy>();
-            BenchmarkRunner.Run<ReturnReadOnlyDictionary>();
+            //BenchmarkRunner.Run<ReturnReadOnlyDictionary>();
+            BenchmarkRunner.Run<StringComparer>();
         }
     }
 }
