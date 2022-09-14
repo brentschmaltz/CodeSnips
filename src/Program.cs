@@ -104,7 +104,7 @@ namespace CodeSnips
             //CreateToken.AddSubClaim();
             //CreateToken.JwtWithActClaim();
             //Contracts.ExploreContractRequires();
-            // ReflectionSnips.Run();
+            //ReflectionSnips.Run();
             //CertificateCrypto.Run();
             //ClearMap.Run();
             //c14n.Run();
@@ -122,8 +122,10 @@ namespace CodeSnips
             //AadIssuerValidatorIssue1836.Run();
             //TokenValidationParametersClone.Run();
             //KeyedHash.Run();
-            Dictionaries.Run();
-
+            //Dictionaries.Run();
+            //WilsonIssue1873.Run();
+            //WilsonIssue1941.Run();
+            CreateToken.Run();
             Console.WriteLine("");
             Console.WriteLine("===================================");
             Console.WriteLine("Press a key to close");

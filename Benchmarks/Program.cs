@@ -14,7 +14,11 @@ namespace Benchmarks
             //BenchmarkRunner.Run<InstanceVars>();
             //BenchmarkRunner.Run<ArrayCopy>();
             //BenchmarkRunner.Run<ReturnReadOnlyDictionary>();
-            BenchmarkRunner.Run<StringComparer>();
+            //BenchmarkRunner.Run<StringComparer>();
+            //BenchmarkRunner.Run<EmbededFunctions>();
+            //BenchmarkRunner.Run<CountDots>();
+            //BenchmarkRunner.Run<UsingArrayPool>();
+            BenchmarkRunner.Run<ReadToken>();
         }
     }
 }

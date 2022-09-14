@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnips", "CodeSnips.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarks", "..\Benchmarks\Benchmarks.csproj", "{BCEA9EB6-A090-4535-8E8E-4AD0820170CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stress", "..\Stress\Stress.csproj", "{1ADF6AD3-BF51-426B-A97D-2C7263039ACF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stress", "..\Stress\Stress.csproj", "{1ADF6AD3-BF51-426B-A97D-2C7263039ACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72CB4185-186F-4276-86A4-A979C64AD0B1}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.config = NuGet.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
