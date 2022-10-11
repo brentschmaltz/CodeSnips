@@ -18,7 +18,7 @@ namespace Benchmarks
             //BenchmarkRunner.Run<EmbededFunctions>();
             //BenchmarkRunner.Run<CountDots>();
             //BenchmarkRunner.Run<UsingArrayPool>();
-            BenchmarkRunner.Run<ReadToken>();
+            BenchmarkRunner.Run<Base64Encoding>();
         }
     }
 }

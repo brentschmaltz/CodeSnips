@@ -26,11 +26,7 @@
 //------------------------------------------------------------------------------
 
 using BenchmarkDotNet.Attributes;
-using Iced.Intel;
 using Microsoft.IdentityModel.JsonWebTokens;
-using static BenchmarkDotNet.Attributes.MarkdownExporterAttribute;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 
 namespace Benchmarks
 {
@@ -47,21 +43,51 @@ namespace Benchmarks
                new JsonWebToken(_jwt);
         }
 
-        // * Summary *
         // 6.23.1
-
-        // 6.22.1
         // * Summary *
-
         //  BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.978/21H2)
         //  Intel Core i7-10610U CPU 1.80GHz, 1 CPU, 8 logical and 4 physical cores
         //  .NET SDK= 6.0.400
-        //  [Host]     : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
-        //  DefaultJob : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
+        //  [Host]     : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+        //  DefaultJob : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+        //  | Method |     Mean |    Error |   StdDev |       Gen0 | Allocated |
+        //  |------- |---------:|---------:|---------:|-----------:|----------:|
+        //  |   Read | 410.9 ms | 20.39 ms | 57.84 ms | 59000.0000 | 235.75 MB |
+
+        // 6.22.1
+        // * Summary *
+        //  BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.978/21H2)
+        //  Intel Core i7-10610U CPU 1.80GHz, 1 CPU, 8 logical and 4 physical cores
+        //  .NET SDK= 6.0.400
+        //  [Host]     : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+        //  DefaultJob : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
 
         //  | Method |    Mean |    Error |   StdDev |        Gen0 | Allocated |
         //  |------- |--------:|---------:|---------:|------------:|----------:|
-        //  |   Read | 1.097 s | 0.0218 s | 0.0446 s | 456000.0000 |   1.78 GB |
+        //  |   Read | 1.101 s | 0.0112 s | 0.0087 s | 456000.0000 |   1.78 GB |
 
+        // 6.13.1
+        // * Summary *
+        //  BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.978/21H2)
+        //  Intel Core i7-10610U CPU 1.80GHz, 1 CPU, 8 logical and 4 physical cores
+        //  .NET SDK= 6.0.400
+        //  [Host]     : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+        //  DefaultJob : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+
+        //  | Method |    Mean |    Error |   StdDev |        Gen0 | Allocated |
+        //  |------- |--------:|---------:|---------:|------------:|----------:|
+        //  |   Read | 1.087 s | 0.0106 s | 0.0089 s | 457000.0000 |   1.78 GB |
+
+        // 6.10.1
+        // * Summary *
+        //  BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.978/21H2)
+        //  Intel Core i7-10610U CPU 1.80GHz, 1 CPU, 8 logical and 4 physical cores
+        //  .NET SDK= 6.0.400
+        //  [Host]     : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+        //  DefaultJob : .NET 6.0.9 (6.0.922.41905), X64 RyuJIT AVX2
+
+        //| Method |    Mean |    Error |   StdDev |  Median |        Gen0 | Allocated |
+        //|------- |--------:|---------:|---------:|--------:|------------:|----------:|
+        //|   Read | 1.395 s | 0.0900 s | 0.2508 s | 1.325 s | 457000.0000 |   1.78 GB |
     }
 }
