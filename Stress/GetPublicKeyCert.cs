@@ -7,21 +7,21 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Stress
 {
-    public class GetPrivateRSAKey
+    public class GetPublicKeyCert
     {
         public static void Run(int numberLoops)
         {
-            X509Certificate2 cert = GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=TestingSTS");
+            X509Certificate2 cert = GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=SelfSignedTestCert");
             byte[] bytes = Guid.NewGuid().ToByteArray();
-            
             X509SecurityKey x509SecurityKey = new(cert);
-            X509SigningCredentials x509SigningCredentials = new X509SigningCredentials(cert);
+            var key = x509SecurityKey.PrivateKey as RSA;
+            byte[] signature = key.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             while (true)
             {
-                //GetPrivateKey(x509SigningCredentials, bytes);
-                GetPrivateKey(new X509SigningCredentials(cert), bytes);
+                x509SecurityKey = new(cert);
+                ValidateSignature(x509SecurityKey, bytes, signature);
                 if (stopwatch.ElapsedMilliseconds > 3000)
                 {
                     var process = Process.GetCurrentProcess();
@@ -31,22 +31,11 @@ namespace Stress
             }
         }
 
-        private static void GetPrivateKey(X509Certificate2 cert, byte[] bytes)
+        private static void ValidateSignature(X509SecurityKey x509SecurityKey, byte[] bytes, byte[] signature)
         {
-            var key = cert.GetRSAPrivateKey();
-            key.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-        }
-
-        private static void GetPrivateKey(X509SecurityKey x509SecurityKey, byte[] bytes)
-        {
-            var key = x509SecurityKey.PrivateKey as RSA;
-            key.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-        }
-
-        private static void GetPrivateKey(X509SigningCredentials x509SigningCredentials, byte[] bytes)
-        {
-            var key = ((x509SigningCredentials.Key) as X509SecurityKey).PrivateKey as RSA;
-            key.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            var key = x509SecurityKey.PublicKey as RSA;
+            bool isValid = key.VerifyData(bytes, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            key.Dispose();
         }
 
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, string subjectName)
