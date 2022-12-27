@@ -5,7 +5,7 @@ namespace CodeSnips.BasicCLR
 {
     public class Dictionaries
     {
-        private static Dictionary<string, object> _dictionary = new Dictionary<string, object> { { "1", "stringAAA" } };
+        private static Dictionary<string, object> _dictionary = new Dictionary<string, object> { { "1", "stringAAAA" } };
 
         public static void Run()
         {
