@@ -1,10 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Iced.Intel;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Text.Json;
 
 namespace Benchmarks

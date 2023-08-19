@@ -19,7 +19,7 @@ namespace Benchmarks
         public void InstanceProperty()
         {
             int integer = 0;
-            Instance instance = new();
+            Instance instance = new Instance();
             for (int i = 0; i < loops; i++)
             {
                 instance.IntegerProperty = integer;
@@ -33,7 +33,7 @@ namespace Benchmarks
         public void InstanceVariable()
         {
             int integer = 0;
-            Instance instance = new();
+            Instance instance = new Instance();
             for (int i = 0; i < loops; i++)
             {
                 instance._integerProperty = integer;

@@ -1,6 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using Microsoft.IdentityModel.Tokens;
-using System;
 
 namespace Benchmarks
 {
@@ -17,8 +15,9 @@ namespace Benchmarks
             //BenchmarkRunner.Run<StringComparer>();
             //BenchmarkRunner.Run<EmbededFunctions>();
             //BenchmarkRunner.Run<CountDots>();
-            //BenchmarkRunner.Run<UsingArrayPool>();
-            BenchmarkRunner.Run<Base64Encoding>();
+            BenchmarkRunner.Run<UsingArrayPool>();
+            //BenchmarkRunner.Run<Base64Encoding>();
+            //BenchmarkRunner.Run<SerializeJsonWebKey>();
         }
     }
 }

@@ -2,10 +2,6 @@
 // Licensed under the MIT License.
 
 using BenchmarkDotNet.Attributes;
-using Iced.Intel;
-using System;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 
 namespace Benchmarks
 {

@@ -25,13 +25,12 @@
 //
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text.Json;
+using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Protocols.SignedHttpRequest;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -46,40 +45,77 @@ namespace CodeSnips
     {
         public static void Run()
         {
-            var audience = "http://relyingParty.com";
-            var issuer = "http://relyingParty.com";
-            var symmetricKeyString = "VbbbbmlbGJw8XH+ZoYBnUHmHga8/o/IduvU/Tht70iE=";
-            var tokenHandler = new JwtSecurityTokenHandler();
-            // ten days
-            tokenHandler.TokenLifetimeInMinutes = 14400;
-            var symmetricSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(symmetricKeyString));
-            var subject = new ClaimsIdentity(
-                new List<Claim>
-                {
-                    new Claim(JwtRegisteredClaimNames.Aud, audience),
-                    new Claim(JwtRegisteredClaimNames.Email, "bob@contoso.com"),
-                    new Claim(JwtRegisteredClaimNames.GivenName, "bob"),
-                    new Claim(JwtRegisteredClaimNames.Sub, "123456789"),
-                    new Claim("resource", "123456789")
-                });
+            var audience = "https://relyingParty.com";
+            var issuer = "https://issuer.com";
+            var tokenHandler = new JsonWebTokenHandler();
 
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            // Create unsigned token
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Issuer = issuer,
-                SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256),
-                Subject = subject
+                Claims = new Dictionary<string, object>
+                {
+                    { JwtRegisteredClaimNames.Aud, audience },
+                    { JwtRegisteredClaimNames.Email, "bob@contoso.com" },
+                    { JwtRegisteredClaimNames.GivenName, "bob" },
+                    { JwtRegisteredClaimNames.Sub, "123456789" }
+                }
             };
 
-            var jwt = tokenHandler.CreateEncodedJwt(tokenDescriptor);
+            string jwt = tokenHandler.CreateToken(tokenDescriptor);
 
-            Console.WriteLine($"Created jwt: {jwt}");
-            Console.WriteLine($"SymmetricKey used: {symmetricKeyString}");
-            Console.WriteLine($"JwtSecurityToken: {new JwtSecurityToken(jwt)}");
+            // Signed with RsaSecurityKey
+            RSA rsa = RSA.Create(2048);
+            RsaSecurityKey rsaSecurityKey = new(rsa);
+
+            tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Issuer = issuer,
+                Claims = new Dictionary<string, object>
+                {
+                    { JwtRegisteredClaimNames.Aud, audience },
+                    { JwtRegisteredClaimNames.Email, "bob@contoso.com" },
+                    { JwtRegisteredClaimNames.GivenName, "bob" },
+                    { JwtRegisteredClaimNames.Sub, "123456789" }
+                },
+                SigningCredentials = new SigningCredentials(rsaSecurityKey, SecurityAlgorithms.RsaSha256)
+            };
+
+            string jws = tokenHandler.CreateToken(tokenDescriptor);
+
+            // Add PoP key
+            RSA rsaForPoP = RSA.Create(2048);
+            RsaSecurityKey rsaPoPSecurityKey = new(rsaForPoP);
+
+            string jwkClaim = SignedHttpRequestUtilities.CreateJwkClaim(JsonWebKeyConverter.ConvertFromRSASecurityKey(rsaPoPSecurityKey));
+            tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Issuer = issuer,
+                Claims = new Dictionary<string, object>
+                {
+                    { JwtRegisteredClaimNames.Aud, audience },
+                    { JwtRegisteredClaimNames.Email, "bob@contoso.com" },
+                    { JwtRegisteredClaimNames.GivenName, "bob" },
+                    { JwtRegisteredClaimNames.Sub, "123456789" },
+                    { ConfirmationClaimTypes.Cnf, jwkClaim }
+                },
+                SigningCredentials = new SigningCredentials(rsaSecurityKey, SecurityAlgorithms.RsaSha256)
+            };
+
+            string popToken = tokenHandler.CreateToken(tokenDescriptor);
+
+
+            Console.WriteLine($"=================");
+            Console.WriteLine($"JsonWebToken (JWT): {jwt}");
+            Console.WriteLine($"=================");
+            Console.WriteLine($"JsonWebToken (JWS): {jws}");
+            Console.WriteLine($"=================");
+            Console.WriteLine($"JsonWebToken (PoP): {popToken}");
+            Console.WriteLine($"=================");
         }
 
         public static void AddSubClaim()
         {
-
             var symmetricKeyString = "VbbbbmlbGJw8XH+ZoYBnUHmHga8/o/IduvU/Tht70iE=";
             var tokenHandler = new JwtSecurityTokenHandler();
             // ten days
