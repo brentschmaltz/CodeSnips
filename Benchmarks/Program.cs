@@ -15,9 +15,12 @@ namespace Benchmarks
             //BenchmarkRunner.Run<StringComparer>();
             //BenchmarkRunner.Run<EmbededFunctions>();
             //BenchmarkRunner.Run<CountDots>();
-            BenchmarkRunner.Run<UsingArrayPool>();
+            //BenchmarkRunner.Run<UsingArrayPool>();
             //BenchmarkRunner.Run<Base64Encoding>();
             //BenchmarkRunner.Run<SerializeJsonWebKey>();
+#if NET6_0_OR_GREATER
+            BenchmarkRunner.Run<MemstreamArrayBufferWriter>();
+#endif
         }
     }
 }

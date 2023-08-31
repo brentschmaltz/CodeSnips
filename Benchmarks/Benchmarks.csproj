@@ -3,12 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net472;net6.0;net7.0;net462</TargetFrameworks>
+    <LangVersion>11</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.27.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.32.2" />
   </ItemGroup>
 
 </Project>
