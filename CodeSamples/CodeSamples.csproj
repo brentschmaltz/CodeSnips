@@ -10,11 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.0.0-preview" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.1.2" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.0.0-preview" />
 	<PackageReference Include="Microsoft.IdentityModel.Protocols.SignedHttpRequest" Version="7.0.0-preview" />
 	<PackageReference Include="Microsoft.IdentityModel.Protocols.WsFederation" Version="7.0.0-preview" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.0-preview" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.1.2" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens.Saml" Version="7.0.0-preview" />
     <PackageReference Include="Microsoft.IdentityModel.Validators" Version="7.0.0-preview" />
     <PackageReference Include="Moq" Version="4.18.1" />
