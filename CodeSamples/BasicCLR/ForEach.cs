@@ -34,7 +34,7 @@ namespace CodeSnips
     {
         public static void Run()
         {
-            List<int> ints = null;
+            List<int> ints = null!; // Intentionally null to test null handling
             foreach (var i in ints)
                 Console.WriteLine($"int: '{i}'.");
         }

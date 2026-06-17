@@ -13,8 +13,8 @@ namespace CodeSnips.BasicCLR
         delegate byte[] EncryptDelegate(byte[] bytes);
         private static bool _useRSAOeapPadding;
         private static readonly Type _rsaEncryptionPaddingType = typeof(object).Assembly.GetType("System.Security.Cryptography.RSAEncryptionPadding", false)!;
-        private static volatile Func<RSA, byte[], byte[]> _rsaEncrypt45Method;
-        private static volatile Func<RSA, byte[], byte[]> _rsaDecrypt45Method;
+        private static volatile Func<RSA, byte[], byte[]>? _rsaEncrypt45Method;
+        private static volatile Func<RSA, byte[], byte[]>? _rsaDecrypt45Method;
 
         public static void Run()
         {
@@ -42,7 +42,7 @@ namespace CodeSnips.BasicCLR
                 Console.WriteLine($"strings are NOT the same: '{strIn}', '{clearText}'.");
         }
 
-        private static RSA RSA { get; set; }
+        private static RSA RSA { get; set; } = null!;
 
         private static byte[] EncryptNet45(byte[] bytes)
         {
@@ -55,7 +55,7 @@ namespace CodeSnips.BasicCLR
                     BindingFlags.Public | BindingFlags.Instance,
                     null,
                     encryptionTypes,
-                    null);
+                    null)!;
 
                 Type delegateType = typeof(Func<,,,>).MakeGenericType(
                             typeof(RSA),
@@ -63,11 +63,14 @@ namespace CodeSnips.BasicCLR
                             _rsaEncryptionPaddingType,
                             typeof(byte[]));
 
-                PropertyInfo prop;
+                PropertyInfo? prop;
                 if (_useRSAOeapPadding)
                     prop = _rsaEncryptionPaddingType.GetProperty("OaepSHA1", BindingFlags.Static | BindingFlags.Public);
                 else
                     prop = _rsaEncryptionPaddingType.GetProperty("Pkcs1", BindingFlags.Static | BindingFlags.Public);
+
+                if (prop == null)
+                    throw new InvalidOperationException("Failed to get RSAEncryptionPadding property");
 
                 Delegate openDelegate = Delegate.CreateDelegate(delegateType, encryptMethod);
                 _rsaEncrypt45Method = (rsaArg, bytesArg) =>
@@ -76,10 +79,10 @@ namespace CodeSnips.BasicCLR
                     {
                         rsaArg,
                         bytesArg,
-                        prop.GetValue(null)
+                        prop.GetValue(null)!
                     };
 
-                    return (byte[])openDelegate.DynamicInvoke(args);
+                    return (byte[])openDelegate.DynamicInvoke(args)!;
                 };
             }
 
@@ -105,16 +108,20 @@ namespace CodeSnips.BasicCLR
                             _rsaEncryptionPaddingType,
                             typeof(byte[]));
 
-                PropertyInfo prop;
+                PropertyInfo? prop;
                 if (_useRSAOeapPadding)
-                    prop = _rsaEncryptionPaddingType.GetProperty("OaepSHA1", BindingFlags.Static | BindingFlags.Public)!;
+                    prop = _rsaEncryptionPaddingType.GetProperty("OaepSHA1", BindingFlags.Static | BindingFlags.Public);
                 else
-                    prop = _rsaEncryptionPaddingType.GetProperty("Pkcs1", BindingFlags.Static | BindingFlags.Public)!;
+                    prop = _rsaEncryptionPaddingType.GetProperty("Pkcs1", BindingFlags.Static | BindingFlags.Public);
+
+                if (prop == null)
+                    throw new InvalidOperationException("Failed to get RSAEncryptionPadding property");
+
                 _rsaDecrypt45Method = (rsaArg, bytesArg) =>
                 {
-                    object[] args = { rsaArg, bytesArg, prop.GetValue(null) };
+                    object[] args = { rsaArg, bytesArg, prop.GetValue(null)! };
                     Delegate openDelegate = Delegate.CreateDelegate(delegateType, encryptMethod)!;
-                    return (byte[])openDelegate.DynamicInvoke(args);
+                    return (byte[])openDelegate.DynamicInvoke(args)!;
                 };
             }
 

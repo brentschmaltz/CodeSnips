@@ -1,0 +1,9 @@
+<Project>
+
+  <PropertyGroup>
+    <IdentityModelVersion>8.19.1</IdentityModelVersion>
+    <SystemTextJsonVersion>10.0.9</SystemTextJsonVersion>
+    <XunitVersion>2.9.3</XunitVersion>
+  </PropertyGroup>
+
+</Project>

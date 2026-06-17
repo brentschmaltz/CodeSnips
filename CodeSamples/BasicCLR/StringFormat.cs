@@ -32,25 +32,5 @@ namespace CodeSnips
 {
     public class StringFormat
     {
-        public static void Run()
-        {
-            string str = null;
-
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Null string format: '{0}'", str));
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Null string format (?? string.Empty): '{0}'", str ?? string.Empty));
-            var strFormatted = string.Format(CultureInfo.InvariantCulture, "Null string format: '{0}'", str);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "String with null param: '{0}'.", strFormatted));
-
-            object[] args = null;
-            try
-            {
-                strFormatted = string.Format(CultureInfo.InvariantCulture, "Null string format: '{0}', '{1}'", args );
-                Console.WriteLine("null args did NOT throw");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("null args threw: '{0}'", ex);
-            }
-        }
     }
 }

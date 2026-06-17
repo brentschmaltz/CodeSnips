@@ -6,7 +6,7 @@ namespace CodeSnips.JwtTokens
 {
     public class ValidateJsonToken
     {
-        public static void Run()
+        public static async Task RunAsync()
         {
             var handler = new JsonWebTokenHandler();
             var token = handler.ReadJsonWebToken("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjp7InByb3AxIjpbInZh" +
@@ -49,7 +49,7 @@ namespace CodeSnips.JwtTokens
                     ValidateAudience = false
                 };
                 JsonWebTokenHandler jsonWebTokenHandler = new JsonWebTokenHandler();
-                TokenValidationResult tokenValidationResult = jsonWebTokenHandler.ValidateToken(jwt, tokenValidationParameters);
+                TokenValidationResult tokenValidationResult = await jsonWebTokenHandler.ValidateTokenAsync(jwt, tokenValidationParameters);
             }
             catch (Exception ex)
             {

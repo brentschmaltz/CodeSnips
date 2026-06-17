@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <SrcTargets>net10.0</SrcTargets>
+  </PropertyGroup>
+</Project>

@@ -39,10 +39,16 @@ namespace Certificates
         {
             X509Certificate2 cert = GetCertificate(StoreName.My, StoreLocation.LocalMachine, "CN=RSAAES");
             var pk = cert.GetRSAPrivateKey() as RSACryptoServiceProvider;
+            if (pk == null)
+                throw new InvalidOperationException("Certificate does not contain an RSA private key.");
+
             byte[] data = UTF8Encoding.UTF8.GetBytes("Here are some bytes");
             var sig = pk.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
             pk = cert.GetRSAPrivateKey() as RSACryptoServiceProvider;
+            if (pk == null)
+                throw new InvalidOperationException("Certificate does not contain an RSA private key.");
+
             sig = pk.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
         }
@@ -50,11 +56,11 @@ namespace Certificates
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, string subjectName)
         {
             X509Store store = new X509Store(name, location);
-            X509Certificate2Collection certificates = null;
+            X509Certificate2Collection? certificates = null;
             store.Open(OpenFlags.ReadOnly);
             try
             {
-                X509Certificate2 result = null;
+                X509Certificate2? result = null;
 
                 // Every time we call store.Certificates property, a new collection will be returned.
                 certificates = store.Certificates;

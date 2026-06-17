@@ -17,7 +17,9 @@ namespace CodeSnips.BasicCLR
         public static void ExploreContractRequires()
         {
             ClassWithContractRequires classWithContractRequires = new ClassWithContractRequires();
-            classWithContractRequires.RequiresNonNUll((string)null);
+#pragma warning disable CS8625, CS8600 // Intentionally passing null to test Contract.Requires
+            classWithContractRequires.RequiresNonNUll(null!);
+#pragma warning restore CS8625, CS8600
         }
     }
 }
