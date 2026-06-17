@@ -38,7 +38,9 @@ namespace CodeSnips.BasicCLR
                 Subject = subject
             };
 
-            Saml2SecurityToken saml2SecurityToken = saml2SecuritytokenHandler.CreateToken(tokenDescriptor) as Saml2SecurityToken;
+            if (saml2SecuritytokenHandler.CreateToken(tokenDescriptor) is not Saml2SecurityToken saml2SecurityToken)
+                throw new InvalidOperationException("Failed to create Saml2SecurityToken");
+
             string samltoken = saml2SecuritytokenHandler.WriteToken(saml2SecurityToken);
 
             TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
@@ -50,10 +52,14 @@ namespace CodeSnips.BasicCLR
 
             ClaimsPrincipal claimsPrincipal = saml2SecuritytokenHandler.ValidateToken(samltoken, tokenValidationParameters, out SecurityToken securityToken);
 
+            if (securityToken is not Saml2SecurityToken validatedSaml2SecurityToken)
+                throw new InvalidOperationException("Validated token is not a Saml2SecurityToken");
 
-            Saml2SecurityToken validatedSaml2SecurityToken = securityToken as Saml2SecurityToken;
             Saml2Assertion saml2Assertion = validatedSaml2SecurityToken.Assertion;
-            object xmlTokenStream = GetProperty(typeof(Saml2Assertion), saml2Assertion, "XmlTokenStream");
+            object? xmlTokenStream = GetProperty(typeof(Saml2Assertion), saml2Assertion, "XmlTokenStream");
+
+            if (xmlTokenStream == null)
+                throw new InvalidOperationException("XmlTokenStream property is null");
 
             MemoryStream memoryStream = new MemoryStream();
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(memoryStream, Encoding.UTF8);
@@ -73,12 +79,12 @@ namespace CodeSnips.BasicCLR
             //return false;
         }
 
-        private static object GetProperty(Type type, object instance, string propertyName)
+        private static object? GetProperty(Type type, object instance, string propertyName)
         {
             return type.InvokeMember(propertyName, getPropertyFlags, null, instance, null);
         }
 
-        public static object Call(object instance, string methodName, params object[] args)
+        public static object? Call(object instance, string methodName, params object[] args)
         {
             return instance.GetType().InvokeMember(methodName, invokeMethodFlags, null, instance, args);
         }

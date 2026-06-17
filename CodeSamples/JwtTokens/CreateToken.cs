@@ -32,8 +32,6 @@ using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Protocols.SignedHttpRequest;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace CodeSnips
@@ -97,7 +95,7 @@ namespace CodeSnips
                     { JwtRegisteredClaimNames.Email, "bob@contoso.com" },
                     { JwtRegisteredClaimNames.GivenName, "bob" },
                     { JwtRegisteredClaimNames.Sub, "123456789" },
-                    { ConfirmationClaimTypes.Cnf, jwkClaim }
+                    { Microsoft.IdentityModel.Tokens.ConfirmationClaimTypes.Cnf, jwkClaim }
                 },
                 SigningCredentials = new SigningCredentials(rsaSecurityKey, SecurityAlgorithms.RsaSha256)
             };
@@ -145,67 +143,15 @@ namespace CodeSnips
             var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
             var jsonToken = new JsonWebToken(token.RawData);
         }
-
-        public static void JwtWithActClaim()
-        {
-            JsonExtensions.Serializer = JsonConvert.SerializeObject;
-            JsonExtensions.Deserializer = JsonConvert.DeserializeObject;
-
-            var delegationClaim1 = new DelegationActorClaim("client1", string.Empty);
-            var delegationClaim2 = new DelegationActorClaim("client2", System.Text.Json.JsonSerializer.Serialize(delegationClaim1));
-            var delegationClaim3 = new DelegationActorClaim("client3", System.Text.Json.JsonSerializer.Serialize(delegationClaim2));
-            var delegationClaim4 = new DelegationActorClaim("client4", System.Text.Json.JsonSerializer.Serialize(delegationClaim3));
-            var claim = delegationClaim4.ToClaim();
-
-            var jwtSecurityToken = CreateJwtSecurityToken(delegationClaim4);
-            var jsonWebToken = CreateJsonWebToken(delegationClaim4);
-
-            Console.WriteLine($"JwtSecurityToken: '{jwtSecurityToken}'.");
-            Console.WriteLine($"JsonWebToken: '{jsonWebToken.Claims}'.");
-        }
-
-        private static JwtSecurityToken CreateJwtSecurityToken(DelegationActorClaim delegationActorClaim)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtPayload = new JwtPayload("http://localhost:5001", null, null, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(2))
-            {
-                // jwtPayload.AddClaim(claim);
-                { "act", JToken.FromObject(delegationActorClaim) }
-            };
-
-            //jwtPayload.Add("act", delegationActorClaim.ToJson());
-            var jwt = new JwtSecurityToken(new JwtHeader(), jwtPayload);
-            var token = tokenHandler.WriteToken(jwt);
-            var claimsPrincipal = tokenHandler.ValidateToken(token, new TokenValidationParameters { ValidateAudience = false, ValidateIssuer = false, RequireSignedTokens = false }, out SecurityToken securityToken);
-            return new JwtSecurityToken(token);
-        }
-
-        private static JsonWebToken CreateJsonWebToken(DelegationActorClaim delegationActorClaim)
-        {
-
-            var tokenHandler = new JsonWebTokenHandler();
-            var token = tokenHandler.CreateToken(
-                new SecurityTokenDescriptor
-                {
-                    Claims = new Dictionary<string, object> { { "act", delegationActorClaim.ToJson() } },
-                    Issuer = "http://localhost:5001",
-                    NotBefore = DateTime.UtcNow,
-                    Expires = DateTime.UtcNow.AddMinutes(2)
-                }
-            );
-
-            var tokenValidationResult = tokenHandler.ValidateToken(token, new TokenValidationParameters { ValidateAudience = false, ValidateIssuer = false, RequireSignedTokens = false });
-            return tokenValidationResult.SecurityToken as JsonWebToken;
-        }
     }
 
     public class DelegationActorClaim
     {
         [JsonPropertyName("sub")]
-        public string ClientId { get; set; } = null;
+        public string ClientId { get; set; } = string.Empty;
 
         [JsonPropertyName("act")]
-        public DelegationActorClaim Actor { get; set; }
+        public DelegationActorClaim? Actor { get; set; }
 
         public DelegationActorClaim() { }
 

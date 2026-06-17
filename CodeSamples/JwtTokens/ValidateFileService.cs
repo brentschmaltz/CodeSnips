@@ -1,14 +1,7 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Protocols;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CodeSnips.JwtTokens
 {
@@ -25,30 +18,6 @@ namespace CodeSnips.JwtTokens
             //ValidateTokenOidc(token);
             ValidateTokenRsa(token, modulus, exponent, keyId);
 
-        }
-
-        static JwtSecurityToken ValidateTokenOidc(string token)
-        {
-            string stsDiscoveryEndpoint = "https://fileservice-azure-ga.authentication.eu20.hana.ondemand.com/oauth/token/.well-known/openid-configuration";
-
-            ConfigurationManager<OpenIdConnectConfiguration> configManager = new(stsDiscoveryEndpoint, new OpenIdConnectConfigurationRetriever());
-            OpenIdConnectConfiguration config = configManager.GetConfigurationAsync().Result;
-
-            TokenValidationParameters validationParameters = new()
-            {
-                ValidateAudience = false,
-                ValidateIssuer = false,
-                IssuerSigningKeys = config.SigningKeys,
-                ValidateLifetime = false
-            };
-
-            JwtSecurityTokenHandler tokendHandler = new();
-
-            SecurityToken jwt;
-
-            var result = tokendHandler.ValidateToken(token, validationParameters, out jwt);
-
-            return jwt as JwtSecurityToken;
         }
 
         static void ValidateTokenRsa(string token, string modulus, string exponent, string keyId)
@@ -95,7 +64,6 @@ namespace CodeSnips.JwtTokens
                 Console.WriteLine($"Exception: {ex}");
             }
         }
-
     }
 }
 

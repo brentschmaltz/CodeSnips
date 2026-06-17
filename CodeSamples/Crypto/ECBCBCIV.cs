@@ -68,7 +68,7 @@ namespace CodeSnips.Crypto
             ICryptoTransform symmetricAlgorithmDecryptorECB = symmetricAlgorithmECB.CreateDecryptor();
             ICryptoTransform symmetricAlgorithmEncryptorECB = symmetricAlgorithmECB.CreateEncryptor();
 
-            byte[] ecbWrappedBytes = null;
+            byte[]? ecbWrappedBytes = null;
             try
             {
                 ecbWrappedBytes = WrapKey(key, symmetricAlgorithmEncryptorECB);
@@ -78,10 +78,11 @@ namespace CodeSnips.Crypto
                 Console.WriteLine($"byte[] ecbWrappedBytes = WrapKey(bytes, symmetricAlgorithmEncryptorECB); threw {ex}");
             }
 
-            byte[] ecbUnwrappedBytes = null;
+            byte[]? ecbUnwrappedBytes = null;
             try
             {
-                ecbUnwrappedBytes = UnwrapKey(ecbWrappedBytes, symmetricAlgorithmDecryptorECB);
+                if (ecbWrappedBytes != null)
+                    ecbUnwrappedBytes = UnwrapKey(ecbWrappedBytes, symmetricAlgorithmDecryptorECB);
             }
             catch (Exception ex)
             {
@@ -105,7 +106,7 @@ namespace CodeSnips.Crypto
             ICryptoTransform symmetricAlgorithmDecryptorCBC = symmetricAlgorithmCBC.CreateDecryptor();
             ICryptoTransform symmetricAlgorithmEncryptorCBC = symmetricAlgorithmCBC.CreateEncryptor();
 
-            byte[] cbcWrappedBytes = null;
+            byte[]? cbcWrappedBytes = null;
             try
             {
                 cbcWrappedBytes = WrapKey(key, symmetricAlgorithmEncryptorCBC);
@@ -115,30 +116,33 @@ namespace CodeSnips.Crypto
                 Console.WriteLine($"byte[] cbcWrappedBytes = WrapKey(bytes, symmetricAlgorithmEncryptorCBC); threw {ex}");
             }
 
-            byte[] cbcUnwrappedBytes = null;
+            byte[]? cbcUnwrappedBytes = null;
             try
             {
-                cbcUnwrappedBytes = UnwrapKey(cbcWrappedBytes, symmetricAlgorithmDecryptorCBC);
+                if (cbcWrappedBytes != null)
+                    cbcUnwrappedBytes = UnwrapKey(cbcWrappedBytes, symmetricAlgorithmDecryptorCBC);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"cbcUnwrappedBytes = UnwrapKey(bytes, symmetricAlgorithmDecryptorCBC); threw {ex}");
             }
 
-            byte[] ecb_cbcUnwrappedBytes = null;
+            byte[]? ecb_cbcUnwrappedBytes = null;
             try
             {
-                ecb_cbcUnwrappedBytes = UnwrapKey(ecbWrappedBytes, symmetricAlgorithmDecryptorCBC);
+                if (ecbWrappedBytes != null)
+                    ecb_cbcUnwrappedBytes = UnwrapKey(ecbWrappedBytes, symmetricAlgorithmDecryptorCBC);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"ecb_cbcUnwrappedBytes = UnwrapKey(bytes, symmetricAlgorithmDecryptorECB); threw {ex}");
             }
 
-            byte[] cbc_ecbUnwrappedBytes = null;
+            byte[]? cbc_ecbUnwrappedBytes = null;
             try
             {
-                cbc_ecbUnwrappedBytes = UnwrapKey(cbcWrappedBytes, symmetricAlgorithmDecryptorECB);
+                if (cbcWrappedBytes != null)
+                    cbc_ecbUnwrappedBytes = UnwrapKey(cbcWrappedBytes, symmetricAlgorithmDecryptorECB);
             }
             catch (Exception ex)
             {
@@ -278,7 +282,8 @@ namespace CodeSnips.Crypto
             */
 
             // The default initialization vector from RFC3394
-            byte[] a = _defaultIV.Clone() as byte[];
+            if (_defaultIV.Clone() is not byte[] a)
+                throw new InvalidOperationException("Failed to clone default IV");
 
             // The number of input blocks
             var n = inputCount >> 3;

@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyDescription("Code for testing out some ideas")]
-[assembly: AssemblyCopyright("Copyright © Brent Schmaltz")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

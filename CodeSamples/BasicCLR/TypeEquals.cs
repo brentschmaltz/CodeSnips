@@ -57,10 +57,7 @@ namespace CodeSnips
             Console.WriteLine($"{d.GetType()}, GetType: {GetType(d)}.");
             Console.WriteLine($"{d.GetType()}, GetTypeIsA: {GetTypeIsA(d)}.");
 
-            Console.WriteLine($"GetTypeIsA - NULL: {GetTypeIsA(null)}.");
-
             Console.WriteLine($"{list.GetType()}, GetTypeIsA: {GetTypeIsA(list)}.");
-
         }
 
         private static string GetType(object o)

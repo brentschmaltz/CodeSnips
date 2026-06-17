@@ -1,0 +1,8 @@
+<Project>
+  
+  <!--CurrentVersion  -->
+  <PropertyGroup>
+    <CurrentVersion>0.0.1</CurrentVersion>
+  </PropertyGroup>
+
+</Project>

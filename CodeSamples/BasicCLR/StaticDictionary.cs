@@ -27,33 +27,12 @@
 
 namespace CodeSnips.BasicCLR
 {
-
-    public class StaticDictionary
-    {
-        public static IDictionary<string, string> DefaultInboundMap = ClaimTypeMapping.InboundMap;
-
-        private IDictionary<string, string> _inboundMap;
-
-        public StaticDictionary()
-        {
-            _inboundMap = new Dictionary<string, string>(ClaimTypeMapping.InboundMap);
-            _inboundMap = DefaultInboundMap;
-        }
-
-        public IDictionary<string, string> InboundMap
-        {
-            get { return _inboundMap; }
-
-            set { _inboundMap = value; }
-        }
-    }
-
     /// <summary>
     /// Defines the inbound and outbound mapping for claim claim types from jwt to .net claim
     /// </summary>
     static class ClaimTypeMapping
     {
-        private static Dictionary<string, string> _inboundMap = null;
+        private static Dictionary<string, string>? _inboundMap = null;
 
         /// <summary>
         /// Initializes static members of the <see cref="ClaimTypeMapping"/> class.
@@ -75,7 +54,7 @@ namespace CodeSnips.BasicCLR
         /// <summary>
         /// Gets the InboundClaimTypeMap used by JwtSecurityTokenHandler when producing claims from jwt. 
         /// </summary>
-        public static IDictionary<string, string> InboundMap
+        public static IDictionary<string, string>? InboundMap
         {
             get
             {

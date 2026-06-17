@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace CodeSnips
 {
@@ -23,9 +21,9 @@ namespace CodeSnips
             IsFound("SecurityAlgorithms.EcdsaSha512Signature");
         }
 
-        private static void IsFound(string alg)
+        private static void IsFound(string? alg)
         {
-            var isfound = Algorithms.Contains(alg);
+            var isfound = Algorithms.Contains(alg ?? string.Empty);
             Console.WriteLine($"Algorithms.Contains('{alg}'): {isfound}");
         }
     }
